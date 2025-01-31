@@ -20,8 +20,8 @@ import logging
 from sqlalchemy import exc
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///emails.db'
-app.config['UPLOAD_FOLDER'] = 'static/uploads'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/emails.db'
+app.config['UPLOAD_FOLDER'] = '/tmp/uploads'
 app.config['SECRET_KEY'] = 'votre_cle_secrete_secure123'
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB
 
