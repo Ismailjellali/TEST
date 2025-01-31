@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h4>Compose Email</h4>
+        </div>
+        <div class="card-body">
+            <form method="POST" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label class="form-label">Subject</label>
+                    <input type="text" class="form-control" name="subject" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Body</label>
+                    <textarea class="form-control" name="body" id="emailBody" rows="10" required></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Schedule Time</label>
+                    <input type="datetime-local" class="form-control" name="scheduled_time" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Recipients (Excel file)</label>
+                    <input type="file" class="form-control" name="recipients_file" accept=".xlsx,.xls" required>
+                    <div class="form-text">Excel file with 'email' column containing addresses</div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Attachments</label>
+                    <input type="file" class="form-control" name="attachments" multiple>
+                    <div class="form-text">Max 5MB per file (PDF, DOC, XLS, images)</div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Schedule Email</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        tinymce.init({
+            selector: '#emailBody',
+            plugins: 'link image code',
+            toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright | link image | code',
+            height: 400
+        });
+    </script>
+{% endblock %}

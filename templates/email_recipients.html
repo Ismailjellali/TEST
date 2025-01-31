@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-header">
+            <h4>Recipients for: {{ email.subject }}</h4>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Email Address</th>
+                        <th>Status</th>
+                        <th>Sent At</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for recipient in email.recipients %}
+                    <tr>
+                        <td>{{ recipient.email_address }}</td>
+                        <td>
+                            <span class="badge bg-{{ 'success' if 'Sent' in recipient.status else 'danger' }}">
+                                {{ recipient.status }}
+                            </span>
+                        </td>
+                        <td>
+                            {% if recipient.sent_at %}
+                                {{ recipient.sent_at.strftime('%Y-%m-%d %H:%M') }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <a href="/email/{{ email.id }}" class="btn btn-secondary">Back to Email</a>
+        </div>
+    </div>
+{% endblock %}
